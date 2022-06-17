@@ -65,11 +65,7 @@ def is_amount_correct(current_amount: float, transfer_amount: str) -> bool:
     """
 
     # пиши код здесь
-    possibility = False
-    if current_amount >= transfer_amount:
-        possibility = True
-    result = possibility
-    return result
+    return current_amount >= transfer_amount
 
 
 def moderate_text(text: str, uncultured_words: Iterable[str]) -> str:
