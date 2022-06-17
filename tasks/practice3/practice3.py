@@ -27,8 +27,17 @@ def count_words(text: str) -> Dict[str, int]:
     """
 
     # пиши свой код здесь
+    dict = {}
+    words = text.replace(r"[-;?!,.\s]\s*", ' ').split()
+    for word in words:
+        if not any(map(str.isdigit, word)):
+            if word.lower() in dict:
+                dict[word.lower()] += 1
+            else:
+                if word != '':
+                    dict[word.lower()] = 1
 
-    return {}
+    return dict
 
 
 def exp_list(numbers: List[int], exp: int) -> List[int]:
