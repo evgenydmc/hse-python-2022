@@ -1,3 +1,4 @@
+import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 
@@ -27,17 +28,17 @@ def count_words(text: str) -> Dict[str, int]:
     """
 
     # пиши свой код здесь
-    dict = {}
-    words = text.replace(r"[-;?!,.\s]\s*", ' ').split()
+    result = {}
+    words = re.split(r"[-;?!,.\s]\s*")
     for word in words:
         if not any(map(str.isdigit, word)):
-            if word.lower() in dict:
-                dict[word.lower()] += 1
+            if word.lower() in result:
+                result[word.lower()] += 1
             else:
                 if word != '':
-                    dict[word.lower()] = 1
+                    result[word.lower()] = 1
 
-    return dict
+    return result
 
 
 def exp_list(numbers: List[int], exp: int) -> List[int]:
