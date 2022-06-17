@@ -21,8 +21,9 @@ def calculate_salary(total_compensation: int) -> float:
 
     :return: сумма заплаты после вычета налога
     """
-    total_compensation = float(total_compensation)
     # пиши свой код здесь
-    result = total_compensation * 0,87
+    result = total_compensation * 0.87
     return result
 
+if __name__ == '__main__':
+    print(calculate_salary(100))
