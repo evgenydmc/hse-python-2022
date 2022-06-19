@@ -7,7 +7,6 @@ class Team:
     """
     Класс - команда.
     У каждой команды есть менеджер, название и участники.
-
     Возможности:
     - добавление участников
     - удаление участника из команды
@@ -27,7 +26,10 @@ class Team:
         и инициализировать контейнер `__members`
         """
 
-        # пиши свой код здесь
+        self.name = name
+        self.manager = manager
+        self.__members = set()
+
 
     def add_member(self, member: Employee) -> None:
         """
@@ -35,7 +37,10 @@ class Team:
         Добавить можно только работника.
         """
 
-        # пиши свой код здесь
+        if isinstance(member, Employee):
+            self.__members.add(member)
+        else:
+            raise TypeError
 
     def remove_member(self, member: Employee) -> None:
         """
@@ -43,7 +48,14 @@ class Team:
         Если в команде нет такого участника поднимается исключение `NoSuchMemberError`
         """
 
-        # пиши свой код здесь
+        if isinstance(member, Employee):
+            if (member in self.__members):
+                self.__members.remove(member)
+            else:
+                raise NoSuchMemberError(self.name, member)
+        else:
+            raise TypeError
+
 
     def get_members(self) -> Set[Employee]:
         """
@@ -51,16 +63,19 @@ class Team:
         чтобы из вне нельзя было поменять список участников внутри класса
         """
 
-        # пиши свой код здесь
+        copy_of_members = self.__members.copy()
+
+        return copy_of_members
+    def __str__(self):
+        return f'team: {self.name} manager: {self.manager.name} number of members: {len(self.__members)}'
+
 
     def show(self) -> None:
         """
         DO NOT EDIT!
         Данный метод нельзя редактировать!
-
         Метод показывает информацию о команде в формате:
         `'team: {team_name} manager: {manager_name} number of members: {members_count)}'`
-
         Задача: доработать класс таким образом, чтобы метод выполнял свою функцию, не меняя содержимое
         этого метода
         """

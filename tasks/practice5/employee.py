@@ -24,7 +24,6 @@ def get_position_level(position_name: str) -> int:
 class Employee:
     """
     Класс - сотрудник
-
     Возможности:
     1. Реализована возможность сравнения двух сотрудников в зависимости от занимаемой должности - метод __eq__
     2. Возможность получить зарплату через метод get_salary
@@ -39,6 +38,13 @@ class Employee:
         """
 
         # пиши свой код здесь
+        self.name = name
+        self.position = position
+
+        if isinstance(salary, int):
+            self._salary = salary
+        else:
+            raise ValueError
 
     def get_salary(self) -> int:
         """
@@ -46,16 +52,25 @@ class Employee:
         """
 
         # пиши свой код здесь
+        return self._salary
+
 
     def __eq__(self, other: object) -> bool:
         """
         Задача: реализовать метод сравнение двух сотрудников, чтобы все тесты проходили.
-
         Сравнение происходит по уровню позиции см. `get_position_level`.
         Если что-то идет не так - бросаются исключения. Смотрим что происходит в тестах.
         """
 
-        # пиши свой код здесь
+        if isinstance(self, Employee) and isinstance(other, Employee):
+            try:
+                if (get_position_level(self.position) != get_position_level(other.position)):
+                    return False
+                else:
+                    return True
+            except NoSuchPositionError:
+                raise ValueError
+        raise TypeError
 
     def __str__(self):
         """
@@ -63,7 +78,7 @@ class Employee:
         Пример вывода: 'name: Ivan position manager'
         """
 
-        # пиши свой код здесь
+        return f'name: {self.name} position: {self.position}'
 
     def __hash__(self):
         return id(self)
@@ -82,7 +97,8 @@ class Developer(Employee):
         Задача: реализовать конструктор класса, используя конструктор родителя
         """
 
-        # пиши свой код здесь
+        super().__init__(name,self.position, salary)
+        self.language=language
 
 
 class Manager(Employee):
@@ -97,4 +113,4 @@ class Manager(Employee):
         Задача: реализовать конструктор класса, используя конструктор родителя
         """
 
-        # пиши свой код здесь
+        super().__init__(name, self.position, salary)
