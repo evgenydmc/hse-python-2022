@@ -1,6 +1,7 @@
-import re
 from pathlib import Path
 from typing import Dict, Any, List, Optional
+import re
+
 
 
 def count_words(text: str) -> Dict[str, int]:
@@ -26,8 +27,6 @@ def count_words(text: str) -> Dict[str, int]:
              ключ - слово в нижнем регистре
              значение - количество вхождений слов в текст
     """
-
-    # пиши свой код здесь
     result = {}
     words = re.split(r"[-;?!,.\s]\s*")
     for word in words:
@@ -41,6 +40,8 @@ def count_words(text: str) -> Dict[str, int]:
     return result
 
 
+
+
 def exp_list(numbers: List[int], exp: int) -> List[int]:
     """
     Функция, которая возводит каждый элемент списка в заданную степень
@@ -50,9 +51,13 @@ def exp_list(numbers: List[int], exp: int) -> List[int]:
     :return: список натуральных чисел
     """
 
-    # пиши свой код здесь
+    counter = 0
+    for word in numbers:
+        word = word ** exp
+        numbers[counter] = word
+        counter += 1
 
-    return []
+    return numbers
 
 
 def get_cashback(operations: List[Dict[str, Any]], special_category: List[str]) -> float:
@@ -115,6 +120,32 @@ def csv_reader(header: str) -> int:
     :return: количество уникальных элементов в столбце
     """
 
-    # пиши свой код здесь
+    import csv
+    words = {}
+    unic_words = 0
+    with open(get_path_to_file(), encoding='utf-8') as r_file:
+        file_reader = csv.reader(r_file, delimiter=",")
+        line_counter = 0
+        chosen_counter = -1
+        for row in file_reader:
+            word_counter = 0
+            for word in row:
+                if line_counter == 0:
+                    if word == header:
+                        chosen_counter = word_counter
+                        words[word] = 1
+                        print("chosen counter =", chosen_counter)
+                else:
+                    if word_counter == chosen_counter:
+                        words[word] = 1
+                word_counter += 1
+            line_counter += 1
+        for word in words:
+            if word != header:
+                unic_words += 1
 
-    return 0
+
+
+
+
+    return unic_words
